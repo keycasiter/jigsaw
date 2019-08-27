@@ -11,13 +11,9 @@ import com.guanjian.jigsaw.domain.specs.Specs;
  * @date 2019/6/12 20:14
  */
 public class Layer {
-    private Material material;//素材
+    private Material material;   //素材
     private Specs specs;      //规格
-
-    public Layer(Material material, Specs specs) {
-        this.material = material;
-        this.specs = specs;
-    }
+    private Integer index;     //堆叠顺序
 
     public Material getMaterial() {
         return material;
@@ -33,5 +29,13 @@ public class Layer {
 
     public void setSpecs(Specs specs) {
         this.specs = specs;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 }

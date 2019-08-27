@@ -1,11 +1,11 @@
 package com.guanjian.jigsaw.service;
 
+import com.guanjian.jigsaw.bean.layout.Layer;
+import com.guanjian.jigsaw.bean.material.Photo;
+import com.guanjian.jigsaw.bean.material.Text;
+import com.guanjian.jigsaw.bean.specs.Element;
 import com.guanjian.jigsaw.constant.Constants;
-import com.guanjian.jigsaw.domain.layout.Layer;
 import com.guanjian.jigsaw.domain.material.Material;
-import com.guanjian.jigsaw.domain.material.Photo;
-import com.guanjian.jigsaw.domain.material.Text;
-import com.guanjian.jigsaw.domain.specs.Element;
 import com.guanjian.jigsaw.domain.specs.Specs;
 import com.guanjian.jigsaw.util.ImageUtil;
 import org.slf4j.Logger;
@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -73,6 +72,7 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
     private void buildPanel() {
         final Integer panelWidth = null == this.width ? Constants.DEFAULT_PANEL_WIDTH : this.width;
         final Integer panelHeight = null == this.height ? Constants.DEFAULT_PANEL_HEIGHT : this.height;
+
         final BufferedImage bi = new BufferedImage(panelWidth, panelHeight, BufferedImage.TYPE_INT_RGB);//INT精确度达到一定,RGB三原色
         panel = bi;
         Graphics2D graphics = bi.createGraphics();
@@ -91,8 +91,8 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
      */
     private void draw(List<Layer> layers) {
         for (final Layer layer : layers) {
-            final Material material = layer.getMaterial();
-            final Specs specs = layer.getSpecs();
+            final Material material = (Material) layer.getMaterial();
+            final Specs specs = (Specs) layer.getSpecs();
             execute(material, specs);
         }
     }
@@ -110,9 +110,9 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
         } catch (Exception e) {
             LOGGER.error("[jigsaw] print image error", e);
         } finally {
-            if (file.exists()) {
-                file.delete();
-            }
+//            if (file.exists()) {
+//                file.delete();
+//            }
         }
 
     }
@@ -130,7 +130,7 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
             Element element = (Element) specs;
 
             try {
-                final File srcFile = photo.getImgFile();
+                final File srcFile = new File(photo.getPath());
                 final Image image = ImageIO.read(srcFile);
                 BufferedImage bi = null;
                 if (srcFile.getName().endsWith(".png")) {
@@ -138,7 +138,7 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
                 } else {
                     bi = new BufferedImage(element.getWidth(), element.getHeight(), BufferedImage.TYPE_INT_RGB);
                 }
-                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), element.getX(), element.getY(), bi.getWidth(), bi.getHeight(), null);
+                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), element.getCoordinateX(), element.getCoordinateY(), bi.getWidth(), bi.getHeight(), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -148,9 +148,10 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
             Text text = (Text) material;
             Element element = (Element) specs;
             //修正字体坐标
-            final int fontSize = ((Font) text.getAttributedString().getIterator().getAttribute(TextAttribute.FONT)).getSize();
-            painting.setColor(text.getColor());
-            painting.drawString(text.getAttributedString().getIterator(), element.getX(), element.getY() + fontSize);
+            final int fontSize = text.getFontSize();
+            String[] rgbColor = text.getRgbColor().split(",");
+            painting.setColor(new Color(Integer.valueOf(rgbColor[1]), Integer.valueOf(rgbColor[2]), Integer.valueOf(rgbColor[3])));
+            painting.drawString(text.getFontText(), element.getCoordinateX(), element.getCoordinateY() + fontSize);
         }
     }
 }

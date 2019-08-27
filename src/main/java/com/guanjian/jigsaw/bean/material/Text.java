@@ -1,4 +1,4 @@
-package com.guanjian.jigsaw.domain.material;
+package com.guanjian.jigsaw.bean.material;
 
 /**
  * 文字素材
@@ -7,11 +7,20 @@ package com.guanjian.jigsaw.domain.material;
  * @description
  * @date 2019/6/14 9:10
  */
-public class Text implements Material {
+public class Text {
+    private String id;              //id
     private String rgbColor;        //RGB颜色
     private String fontText;           //字体文本
     private Integer fontSize;           //字体大小
     private String fontFormat;         //字体样式
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getRgbColor() {
         return rgbColor;

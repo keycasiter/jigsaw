@@ -1,9 +1,5 @@
 package com.guanjian.jigsaw.domain.material;
 
-import com.guanjian.jigsaw.util.ImageUtil;
-
-import java.io.File;
-
 /**
  * 图片素材
  *
@@ -12,18 +8,23 @@ import java.io.File;
  * @date 2019/6/14 9:17
  */
 public class Photo implements Material {
-    private File imgFile;      //图片文件
+    private String imgUrl;      //图片文件网络链接
+    private String imgPath;     //图片文件路径
 
-    public Photo(File imgFile) {
-        this.imgFile = imgFile;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public File getImgFile() {
-        return imgFile;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
-    public void setImgFile(File imgFile) {
-        this.imgFile = imgFile;
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public static boolean isInstance(Object o) {

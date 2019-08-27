@@ -1,6 +1,6 @@
 package com.guanjian.jigsaw.service;
 
-import com.guanjian.jigsaw.domain.layout.Layer;
+import com.guanjian.jigsaw.bean.layout.Layer;
 
 import java.util.List;
 
