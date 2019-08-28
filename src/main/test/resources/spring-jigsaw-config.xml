@@ -7,14 +7,12 @@
                                    http://www.guanjian.com/schema/jigsaw
                                    http://www.guanjian.com/schema/jigsaw.xsd">
 
-    <jigsaw:layout>
-        <jigsaw:panel id="" height="100" width="100"/>
-        <jigsaw:layer />
-    </jigsaw:layout>
 
-    <jigsaw:layer></jigsaw:layer>
-    <jigsaw:panel></jigsaw:panel>
 
     <jigsaw:text id="textDemo" rgbColor="11,11,11" fontSize="14" fontText="测试" fontFormat="宋体"/>
     <jigsaw:element id="elementDemo" width="100" height="100" coordinateX="0" coordinateY="0"/>
+    <jigsaw:photo id="photoDemo" path="" />
+    <jigsaw:panel id="panelDemo" height="200" width="200" />
+
+    <jigsaw:layer id="layerDemo" materialRef="photoDemo" specsRef="elementDemo" index="1"/>
 </beans>

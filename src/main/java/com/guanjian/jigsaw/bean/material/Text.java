@@ -7,7 +7,7 @@ package com.guanjian.jigsaw.bean.material;
  * @description
  * @date 2019/6/14 9:10
  */
-public class Text {
+public class Text implements Material{
     private String id;              //id
     private String rgbColor;        //RGB颜色
     private String fontText;           //字体文本

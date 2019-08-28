@@ -7,9 +7,8 @@ package com.guanjian.jigsaw.bean.material;
  * @description
  * @date 2019/6/14 9:17
  */
-public class Photo {
+public class Photo implements Material {
     private String id;       //id
-    private String url;      //图片文件网络链接
     private String path;     //图片文件路径
 
     public String getId() {
@@ -18,14 +17,6 @@ public class Photo {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getPath() {

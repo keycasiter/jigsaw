@@ -1,6 +1,7 @@
 package com.guanjian.jigsaw.bean.layout;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import com.guanjian.jigsaw.bean.material.Material;
+import com.guanjian.jigsaw.bean.specs.Specs;
 
 /**
  * 图层
@@ -11,8 +12,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
  */
 public class Layer {
     private String id;         //id
-    private String material;   //素材
-    private String specs;      //规格
+    private Material materialRef;   //素材
+    private Specs specsRef;      //规格
     private Integer index;     //堆叠顺序
 
     private Layer() {
@@ -26,20 +27,20 @@ public class Layer {
         this.id = id;
     }
 
-    public String getMaterial() {
-        return material;
+    public Material getMaterialRef() {
+        return materialRef;
     }
 
-    public void setMaterial(String material) {
-        this.material = material;
+    public void setMaterialRef(Material materialRef) {
+        this.materialRef = materialRef;
     }
 
-    public String getSpecs() {
-        return specs;
+    public Specs getSpecsRef() {
+        return specsRef;
     }
 
-    public void setSpecs(String specs) {
-        this.specs = specs;
+    public void setSpecsRef(Specs specsRef) {
+        this.specsRef = specsRef;
     }
 
     public Integer getIndex() {

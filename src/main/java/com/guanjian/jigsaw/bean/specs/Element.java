@@ -5,7 +5,7 @@ package com.guanjian.jigsaw.bean.specs;
  * @description
  * @date 2019/6/14 10:39
  */
-public class Element {
+public class Element implements Specs{
     private String id;     //id
     private Integer height;//长度
     private Integer width;//宽度

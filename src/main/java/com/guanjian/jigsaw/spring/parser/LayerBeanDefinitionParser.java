@@ -20,21 +20,21 @@ public class LayerBeanDefinitionParser extends AbstractSingleBeanDefinitionParse
     protected void doParse(Element element, BeanDefinitionBuilder builder) {
 
         final String id = element.getAttribute("id");
-        final String material = element.getAttribute("material");
-        final String specs = element.getAttribute("specs");
+        final String materialRef = element.getAttribute("materialRef");
+        final String specsRef = element.getAttribute("specsRef");
         final String index = element.getAttribute("index");
 
         if (StringUtils.hasText(id)) {
             builder.addPropertyValue("id", id);
         }
-        if (StringUtils.hasText(material)) {
-            builder.addPropertyValue("material", material);
+        if (StringUtils.hasText(materialRef)) {
+            builder.addPropertyReference("materialRef", materialRef);
         }
-        if (StringUtils.hasText(specs)) {
-            builder.addPropertyValue("specs", specs);
+        if (StringUtils.hasText(specsRef)) {
+            builder.addPropertyReference("specsRef", specsRef);
         }
         if (StringUtils.hasText(index)) {
-            builder.addPropertyValue("index", Integer.valueOf(index));
+            builder.addPropertyValue("index", index);
         }
     }
 }

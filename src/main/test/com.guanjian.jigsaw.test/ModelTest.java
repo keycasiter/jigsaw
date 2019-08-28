@@ -1,19 +1,5 @@
 package com.guanjian.jigsaw.test;
 
-import com.guanjian.jigsaw.domain.layout.Layer;
-import com.guanjian.jigsaw.domain.material.Photo;
-import com.guanjian.jigsaw.domain.material.Text;
-import com.guanjian.jigsaw.domain.specs.Element;
-import com.guanjian.jigsaw.service.GraphicsFactory;
-import com.guanjian.jigsaw.util.FontUtil;
-
-import java.awt.*;
-import java.awt.font.TextAttribute;
-import java.io.File;
-import java.text.AttributedString;
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModelTest {
 
 //   public static void main(String[] args) {

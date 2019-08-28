@@ -1,6 +1,10 @@
 package com.guanjian.jigsaw.test;
 
 import com.guanjian.jigsaw.bean.layout.Layer;
+import com.guanjian.jigsaw.bean.layout.Panel;
+import com.guanjian.jigsaw.bean.material.Photo;
+import com.guanjian.jigsaw.bean.material.Text;
+import com.guanjian.jigsaw.bean.specs.Element;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
@@ -24,9 +28,16 @@ public class ConfigReaderTest implements ApplicationContextAware {
 
     @Test
     public void test() {
-        Layer layer = (Layer) applicationContext.getBean("layoutDemo");
-        System.out.println(layer.getSpecs());
-        System.out.println(layer.getMaterial());
-        System.out.println(layer.getIndex());
+        Panel panel = (Panel) applicationContext.getBean("panelDemo");
+        Text text = (Text) applicationContext.getBean("textDemo");
+        Photo photo = (Photo) applicationContext.getBean("photoDemo");
+        Element element = (Element) applicationContext.getBean("elementDemo");
+        Layer layer = (Layer) applicationContext.getBean("layerDemo");
+        System.out.println(panel.getId());
+        System.out.println(text.getId());
+        System.out.println(photo.getId());
+        System.out.println(element.getId());
+        System.out.println(layer.getId());
+        System.out.println(((Photo)layer.getMaterialRef()).getId());
     }
 }
