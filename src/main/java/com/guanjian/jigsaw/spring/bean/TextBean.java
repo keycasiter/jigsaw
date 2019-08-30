@@ -7,25 +7,30 @@ import java.io.Serializable;
  * @description
  * @date 2019/6/14 9:10
  */
-public class TextBean implements Material , Serializable {
+public class TextBean implements Serializable {
 
     private static final long serialVersionUID = 4440001171404980039L;
 
-    private String id;              //id
-    private String rgbColor;        //RGB颜色
-    private String fontText;           //字体文本
-    private Integer fontSize;           //字体大小
-    private String fontFormat;         //字体样式
-
-    public TextBean() {}
-
-    public TextBean(String id, String rgbColor, String fontText, Integer fontSize, String fontFormat) {
-        this.id = id;
-        this.rgbColor = rgbColor;
-        this.fontText = fontText;
-        this.fontSize = fontSize;
-        this.fontFormat = fontFormat;
-    }
+    /**
+     * id标识
+     */
+    private String id;
+    /**
+     * RGB颜色
+     */
+    private String rgbColor;
+    /**
+     * 字体文本
+     */
+    private String text;
+    /**
+     * 字体大小
+     */
+    private Integer size;
+    /**
+     * 字体样式
+     */
+    private String format;
 
     public String getId() {
         return id;
@@ -43,27 +48,27 @@ public class TextBean implements Material , Serializable {
         this.rgbColor = rgbColor;
     }
 
-    public String getFontText() {
-        return fontText;
+    public String getText() {
+        return text;
     }
 
-    public void setFontText(String fontText) {
-        this.fontText = fontText;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Integer getFontSize() {
-        return fontSize;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setFontSize(Integer fontSize) {
-        this.fontSize = fontSize;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
-    public String getFontFormat() {
-        return fontFormat;
+    public String getFormat() {
+        return format;
     }
 
-    public void setFontFormat(String fontFormat) {
-        this.fontFormat = fontFormat;
+    public void setFormat(String format) {
+        this.format = format;
     }
 }

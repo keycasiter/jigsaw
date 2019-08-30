@@ -7,7 +7,7 @@
     <xsd:annotation>
         <xsd:documentation><![CDATA[ Jigsaw XSD ]]></xsd:documentation>
     </xsd:annotation>
-    <!-- com.guanjian.jigsaw.spring.bean.model.Layout -->
+    <!-- com.guanjian.jigsaw.spring.configig.model.Layout -->
     <xsd:element name="layout">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 模板布局 ]]></xsd:documentation>
@@ -25,7 +25,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- com.guanjian.jigsaw.spring.bean.PanelBean -->
+    <!-- com.guanjian.jigsaw.spring.configig.PanelConfigig -->
     <xsd:element name="panel">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 画板 ]]></xsd:documentation>
@@ -49,7 +49,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- com.guanjian.jigsaw.spring.bean.model.layerBean -->
+    <!-- com.guanjian.jigsaw.spring.configig.model.layerBean -->
     <xsd:element name="layer">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 图层 ]]></xsd:documentation>
@@ -92,7 +92,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- com.guanjian.jigsaw.spring.bean.ImageBean -->
+    <!-- com.guanjian.jigsaw.spring.configig.ImageConfigig -->
     <xsd:element name="image">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 图像 ]]></xsd:documentation>
@@ -111,7 +111,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- com.guanjian.jigsaw.spring.bean.TextBean -->
+    <!-- com.guanjian.jigsaw.spring.configig.TextConfigig -->
     <xsd:element name="text">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 文本 ]]></xsd:documentation>
@@ -127,17 +127,17 @@
                     <xsd:documentation><![CDATA[ 文本颜色 ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
-            <xsd:attribute name="fontText" type="xsd:string" use="required">
+            <xsd:attribute name="text" type="xsd:string" use="required">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[ 文本内容 ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
-            <xsd:attribute name="fontSize" type="xsd:string" default="16">
+            <xsd:attribute name="size" type="xsd:string" default="16">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[ 字体大小 ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
-            <xsd:attribute name="fontFormat" type="xsd:string" default="宋体">
+            <xsd:attribute name="format" type="xsd:string" default="宋体">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[ 字体样式 ]]></xsd:documentation>
                 </xsd:annotation>

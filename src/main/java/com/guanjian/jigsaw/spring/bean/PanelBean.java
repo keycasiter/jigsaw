@@ -9,25 +9,25 @@ public class PanelBean implements Serializable {
 
     private static final long serialVersionUID = 5639450153336902191L;
 
+    /**
+     * id标识
+     */
     private String id;
+    /**
+     * 宽度
+     */
     private Integer width;
+    /**
+     * 高度
+     */
     private Integer height;
 
     public PanelBean() {
     }
 
-    public PanelBean(String id, Integer width, Integer height) {
-        this.id = id;
+    public PanelBean(Integer width, Integer height) {
         this.width = width;
         this.height = height;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Integer getWidth() {

@@ -1,6 +1,6 @@
 package com.guanjian.jigsaw.test;
 
-import com.guanjian.jigsaw.spring.bean.LayoutBean;
+import com.guanjian.jigsaw.spring.bean.TextBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Arrays;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring-config.xml")
@@ -24,7 +26,16 @@ public class ConfigReaderTest implements ApplicationContextAware {
 
     @Test
     public void test() {
-        LayoutBean layout1 = (LayoutBean) applicationContext.getBean("layout1");
-        System.out.println(layout1.getId());
+        System.out.println(Arrays.toString(applicationContext.getBeanDefinitionNames()));
+        TextBean textBean = (TextBean) applicationContext.getBean("text1");
+        System.out.println(textBean.getSize());
+        System.out.println(textBean.getFormat());
+        System.out.println(textBean.getRgbColor());
+        System.out.println(textBean.getText());
+        System.out.println(textBean.getId());
+    }
+
+    public static void main(String[] args) {
+
     }
 }

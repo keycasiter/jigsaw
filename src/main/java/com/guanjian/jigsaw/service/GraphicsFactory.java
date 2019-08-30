@@ -1,10 +1,7 @@
 package com.guanjian.jigsaw.service;
 
 import com.guanjian.jigsaw.constant.Constants;
-import com.guanjian.jigsaw.spring.bean.ImageBean;
 import com.guanjian.jigsaw.spring.bean.LayerBean;
-import com.guanjian.jigsaw.spring.bean.Material;
-import com.guanjian.jigsaw.spring.bean.TextBean;
 import com.guanjian.jigsaw.util.ImageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +10,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -119,33 +115,33 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
      * @param layerBean
      */
     private void execute(LayerBean layerBean) {
-        final Material material = layerBean.getMaterialId();
-        //图片图层
-        if (material instanceof ImageBean) {
-            ImageBean imageBean = (ImageBean) material;
-
-            try {
-                final File srcFile = new File(imageBean.getPath());
-                final Image image = ImageIO.read(srcFile);
-                BufferedImage bi = null;
-                if (srcFile.getName().endsWith(".png")) {
-                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_ARGB);
-                } else {
-                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_RGB);
-                }
-                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), layerBean.getCoordinateX(), layerBean.getCoordinateY(), bi.getWidth(), bi.getHeight(), null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        //文字图层
-        if (material instanceof TextBean) {
-            TextBean textBean = (TextBean) material;
-            //修正字体坐标
-            final int fontSize = textBean.getFontSize();
-            String[] rgbColor = textBean.getRgbColor().split(",");
-            painting.setColor(new Color(Integer.valueOf(rgbColor[1]), Integer.valueOf(rgbColor[2]), Integer.valueOf(rgbColor[3])));
-            painting.drawString(textBean.getFontText(), layerBean.getCoordinateX(), layerBean.getCoordinateY() + fontSize);
-        }
+//        final Material material = layerBean.getMaterialId();
+//        //图片图层
+//        if (material instanceof ImageBean) {
+//            ImageBean imageBean = (ImageBean) material;
+//
+//            try {
+//                final File srcFile = new File(imageBean.getPath());
+//                final Image image = ImageIO.read(srcFile);
+//                BufferedImage bi = null;
+//                if (srcFile.getName().endsWith(".png")) {
+//                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_ARGB);
+//                } else {
+//                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_RGB);
+//                }
+//                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), layerBean.getCoordinateX(), layerBean.getCoordinateY(), bi.getWidth(), bi.getHeight(), null);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        //文字图层
+//        if (material instanceof TextBean) {
+//            TextBean textConfig = (TextBean) material;
+//            //修正字体坐标
+//            final int fontSize = textConfig.getFontSize();
+//            String[] rgbColor = textConfig.getRgbColor().split(",");
+//            painting.setColor(new Color(Integer.valueOf(rgbColor[1]), Integer.valueOf(rgbColor[2]), Integer.valueOf(rgbColor[3])));
+//            painting.drawString(textConfig.getFontText(), layerBean.getCoordinateX(), layerBean.getCoordinateY() + fontSize);
+//        }
     }
 }

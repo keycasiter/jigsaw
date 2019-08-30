@@ -10,18 +10,18 @@ public class LayoutBean implements Serializable {
 
     private static final long serialVersionUID = 1851454407580244706L;
 
+    /**
+     * 标识id
+     */
     private String id;
-    private PanelBean panelId;
-    private List<LayerBean> layerIdList;
-
-    public LayoutBean() {
-    }
-
-    public LayoutBean(String id, com.guanjian.jigsaw.spring.bean.PanelBean panelId, List<com.guanjian.jigsaw.spring.bean.LayerBean> layerIdList) {
-        this.id = id;
-        this.panelId = panelId;
-        this.layerIdList = layerIdList;
-    }
+    /**
+     * 画板
+     */
+    private PanelBean panel;
+    /**
+     * 图层
+     */
+    private List<LayerBean> layerList;
 
     public String getId() {
         return id;
@@ -31,19 +31,19 @@ public class LayoutBean implements Serializable {
         this.id = id;
     }
 
-    public PanelBean getPanelId() {
-        return panelId;
+    public PanelBean getPanel() {
+        return panel;
     }
 
-    public void setPanelId(PanelBean panelId) {
-        this.panelId = panelId;
+    public void setPanel(PanelBean panel) {
+        this.panel = panel;
     }
 
-    public List<LayerBean> getLayerIdList() {
-        return layerIdList;
+    public List<LayerBean> getLayerList() {
+        return layerList;
     }
 
-    public void setLayerIdList(List<LayerBean> layerIdList) {
-        this.layerIdList = layerIdList;
+    public void setLayerList(List<LayerBean> layerList) {
+        this.layerList = layerList;
     }
 }
