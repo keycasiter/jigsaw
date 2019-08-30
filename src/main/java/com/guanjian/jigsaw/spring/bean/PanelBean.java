@@ -1,12 +1,26 @@
-package com.guanjian.jigsaw.bean.layout;
+package com.guanjian.jigsaw.spring.bean;
+
+import java.io.Serializable;
 
 /**
  * created by guanjian on 2019/8/28 9:56
  */
-public class Panel {
+public class PanelBean implements Serializable {
+
+    private static final long serialVersionUID = 5639450153336902191L;
+
     private String id;
     private Integer width;
     private Integer height;
+
+    public PanelBean() {
+    }
+
+    public PanelBean(String id, Integer width, Integer height) {
+        this.id = id;
+        this.width = width;
+        this.height = height;
+    }
 
     public String getId() {
         return id;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jigsaw="http://www.guanjian.com/schema/jigsaw"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                                   http://www.guanjian.com/schema/jigsaw
+                                   http://www.guanjian.com/schema/jigsaw.xsd">
+
+    <jigsaw:layout id="layout1">
+        <jigsaw:panel id="globalPanel" height="200" width="200"/>
+        <jigsaw:layer id="layer1" height="200" width="200" coordinateX="0" coordinateY="0" coordinateZ="0">
+            <jigsaw:image id="image1"/>
+        </jigsaw:layer>
+        <jigsaw:layer id="layer2" height="200" width="200" coordinateX="0" coordinateY="0" coordinateZ="0">
+            <jigsaw:image id="image2"/>
+        </jigsaw:layer>
+    </jigsaw:layout>
+
+    <!--<jigsaw:layout id="layout2">-->
+        <!--<jigsaw:panel id="globalPane2" height="200" width="200"/>-->
+        <!--<jigsaw:layer id="layer2" height="200" width="100" coordinateX="20" coordinateY="0" coordinateZ="0">-->
+            <!--<jigsaw:image id="image2"/>-->
+        <!--</jigsaw:layer>-->
+    <!--</jigsaw:layout>-->
+
+</beans>

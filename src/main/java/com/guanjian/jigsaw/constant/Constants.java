@@ -26,6 +26,11 @@ public final class Constants {
     //临时文件存放路径
     public final static String TMP_FILE_PATH = FontUtil.class.getResource("/").getPath();
 
+    //全局变量
+    public final static class Global{
+        public final static String COMMA = ",";
+    }
+
     //全局临时文件线程绑定池
     public final static ThreadLocal<List<String>> TMP_FILE_POOL = new ThreadLocal<List<String>>() {
         @Override

@@ -1,4 +1,6 @@
-package com.guanjian.jigsaw.bean.material;
+package com.guanjian.jigsaw.spring.bean;
+
+import java.io.Serializable;
 
 /**
  * 图片素材
@@ -7,9 +9,20 @@ package com.guanjian.jigsaw.bean.material;
  * @description
  * @date 2019/6/14 9:17
  */
-public class Photo implements Material {
+public class ImageBean implements Material, Serializable {
+
+    private static final long serialVersionUID = 7027243541313225418L;
+
     private String id;       //id
     private String path;     //图片文件路径
+
+    public ImageBean() {
+    }
+
+    public ImageBean(String id, String path) {
+        this.id = id;
+        this.path = path;
+    }
 
     public String getId() {
         return id;
@@ -25,9 +38,5 @@ public class Photo implements Material {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public static boolean isInstance(Object o) {
-        return o instanceof Photo;
     }
 }

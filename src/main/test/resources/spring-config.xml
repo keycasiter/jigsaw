@@ -12,5 +12,5 @@
 	<context:component-scan base-package="com.guanjian.jigsaw" />
 	<aop:aspectj-autoproxy/>
     <!-- 配置文件读入 -->
-	<import resource="classpath:spring-jigsaw-config.xml"/>
+	<import resource="classpath:jigsaw/spring-*-config.xml" />
 </beans>

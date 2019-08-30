@@ -1,146 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema
+        xmlns="http://www.guanjian.com/schema/jigsaw"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:beans="http://www.springframework.org/schema/beans"
-        targetNamespace="http://www.guanjian.com/schema/jigsaw"
-        elementFormDefault="qualified">
+        targetNamespace="http://www.guanjian.com/schema/jigsaw">
 
-    <xsd:import namespace="http://www.springframework.org/schema/beans"/>
+    <xsd:annotation>
+        <xsd:documentation><![CDATA[ Jigsaw XSD ]]></xsd:documentation>
+    </xsd:annotation>
+    <!-- com.guanjian.jigsaw.spring.bean.model.Layout -->
+    <xsd:element name="layout">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[ 模板布局 ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="panel" />
+                <xsd:element ref="layer" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
 
-    <!--&lt;!&ndash; layout &ndash;&gt;-->
-    <!--<xsd:element name="layout">-->
-    <!--<xsd:complexType>-->
-    <!--<xsd:complexContent>-->
-    <!--<xsd:extension base="beans:identifiedType">-->
-    <!--<xsd:sequence>-->
-    <!--<xsd:element ref="panel" />-->
-    <!--<xsd:element ref="layer" maxOccurs="unbounded"/>-->
-    <!--</xsd:sequence>-->
-    <!--</xsd:extension>-->
-    <!--</xsd:complexContent>-->
-    <!--</xsd:complexType>-->
-    <!--</xsd:element>-->
-
-    <!-- panel -->
+    <!-- com.guanjian.jigsaw.spring.bean.PanelBean -->
     <xsd:element name="panel">
         <xsd:annotation>
-            <xsd:documentation><![CDATA[画板]]></xsd:documentation>
+            <xsd:documentation><![CDATA[ 画板 ]]></xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="height" type="xsd:int" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[高度]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="width" type="xsd:int" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[宽度]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                </xsd:extension>
-            </xsd:complexContent>
+            <xsd:attribute name="id" type="xsd:ID" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="height" type="xsd:int" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 高度 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="width" type="xsd:int" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 宽度 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 
-    <!-- layer -->
+    <!-- com.guanjian.jigsaw.spring.bean.model.layerBean -->
     <xsd:element name="layer">
         <xsd:annotation>
-            <xsd:documentation><![CDATA[图层]]></xsd:documentation>
+            <xsd:documentation><![CDATA[ 图层 ]]></xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="materialRef" type="xsd:string" use="required"></xsd:attribute>
-                    <xsd:attribute name="specsRef" type="xsd:string" use="required"></xsd:attribute>
-                    <xsd:attribute name="index" type="xsd:int" use="required"></xsd:attribute>
-                </xsd:extension>
-            </xsd:complexContent>
+            <xsd:choice>
+                <xsd:element ref="text"/>
+                <xsd:element ref="image"/>
+            </xsd:choice>
+            <xsd:attribute name="id" type="xsd:ID" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="height" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 高度 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="width" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 宽度 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="coordinateX" type="xsd:int" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ X轴坐标 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="coordinateY" type="xsd:int" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ Y轴坐标 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="coordinateZ" type="xsd:int" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ Z轴坐标 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 
-    <!-- specs：element -->
-    <xsd:element name="element">
+    <!-- com.guanjian.jigsaw.spring.bean.ImageBean -->
+    <xsd:element name="image">
         <xsd:annotation>
-            <xsd:documentation><![CDATA[元素]]></xsd:documentation>
+            <xsd:documentation><![CDATA[ 图像 ]]></xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="height" type="xsd:int" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[高度]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="width" type="xsd:int" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[宽度]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="coordinateX" type="xsd:int" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[x坐标轴位]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="coordinateY" type="xsd:int" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[y坐标轴位]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                </xsd:extension>
-            </xsd:complexContent>
+            <xsd:attribute name="id" type="xsd:ID" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="path" type="xsd:string" default="" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 图片路径 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 
-    <!-- material：photo -->
-    <xsd:element name="photo">
-        <xsd:annotation>
-            <xsd:documentation><![CDATA[图像]]></xsd:documentation>
-        </xsd:annotation>
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="path" type="xsd:string" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[图片路径]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <!-- material：text -->
+    <!-- com.guanjian.jigsaw.spring.bean.TextBean -->
     <xsd:element name="text">
         <xsd:annotation>
-            <xsd:documentation><![CDATA[文本]]></xsd:documentation>
+            <xsd:documentation><![CDATA[ 文本 ]]></xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="rgbColor" type="xsd:string" default="0,0,0">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[文本颜色]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="fontText" type="xsd:string" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[文本内容]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="fontSize" type="xsd:string" default="16">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[字体大小]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="fontFormat" type="xsd:string" default="宋体">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[字体样式]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                </xsd:extension>
-            </xsd:complexContent>
+            <xsd:attribute name="id" type="xsd:ID" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="rgbColor" type="xsd:string" default="0,0,0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 文本颜色 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="fontText" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 文本内容 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="fontSize" type="xsd:string" default="16">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 字体大小 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="fontFormat" type="xsd:string" default="宋体">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 字体样式 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 

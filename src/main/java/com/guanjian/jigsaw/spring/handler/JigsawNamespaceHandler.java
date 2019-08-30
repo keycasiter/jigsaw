@@ -1,6 +1,7 @@
 package com.guanjian.jigsaw.spring.handler;
 
-import com.guanjian.jigsaw.spring.parser.*;
+import com.guanjian.jigsaw.spring.bean.LayoutBean;
+import com.guanjian.jigsaw.spring.parser.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 /**
@@ -9,10 +10,6 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 public class JigsawNamespaceHandler extends NamespaceHandlerSupport {
     @Override
     public void init() {
-        registerBeanDefinitionParser("panel", new PanelBeanDefinitionParser());
-        registerBeanDefinitionParser("photo", new PhotoBeanDefinitionParser());
-        registerBeanDefinitionParser("text", new TextBeanDefinitionParser());
-        registerBeanDefinitionParser("element", new ElementBeanDefinitionParser());
-        registerBeanDefinitionParser("layer", new LayerBeanDefinitionParser());
+        registerBeanDefinitionParser("layout", new BeanDefinitionParser("layout", LayoutBean.class));
     }
 }

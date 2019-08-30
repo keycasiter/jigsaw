@@ -1,6 +1,6 @@
 package com.guanjian.jigsaw.service;
 
-import com.guanjian.jigsaw.bean.layout.Layer;
+import com.guanjian.jigsaw.spring.bean.LayerBean;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public abstract class AbstractGrapicsFactory implements IGraphicsFactory {
     /**
      * 图片制作方法
      *
-     * @param layers 图层素材
+     * @param layerBeans 图层素材
      */
-    public abstract void produce(List<Layer> layers);
+    public abstract void produce(List<LayerBean> layerBeans);
 }

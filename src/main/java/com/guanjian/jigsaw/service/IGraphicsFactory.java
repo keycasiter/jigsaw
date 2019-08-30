@@ -1,6 +1,6 @@
 package com.guanjian.jigsaw.service;
 
-import com.guanjian.jigsaw.bean.layout.Layer;
+import com.guanjian.jigsaw.spring.bean.LayerBean;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface IGraphicsFactory {
     /**
      * 拼图方法
      *
-     * @param layers 图层素材
+     * @param layerBeans 图层素材
      */
-    void produce(List<Layer> layers);
+    void produce(List<LayerBean> layerBeans);
 }

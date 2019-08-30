@@ -1,18 +1,31 @@
-package com.guanjian.jigsaw.bean.material;
+package com.guanjian.jigsaw.spring.bean;
+
+import java.io.Serializable;
 
 /**
- * 文字素材
- *
  * @author guanjian
  * @description
  * @date 2019/6/14 9:10
  */
-public class Text implements Material{
+public class TextBean implements Material , Serializable {
+
+    private static final long serialVersionUID = 4440001171404980039L;
+
     private String id;              //id
     private String rgbColor;        //RGB颜色
     private String fontText;           //字体文本
     private Integer fontSize;           //字体大小
     private String fontFormat;         //字体样式
+
+    public TextBean() {}
+
+    public TextBean(String id, String rgbColor, String fontText, Integer fontSize, String fontFormat) {
+        this.id = id;
+        this.rgbColor = rgbColor;
+        this.fontText = fontText;
+        this.fontSize = fontSize;
+        this.fontFormat = fontFormat;
+    }
 
     public String getId() {
         return id;
@@ -53,9 +66,4 @@ public class Text implements Material{
     public void setFontFormat(String fontFormat) {
         this.fontFormat = fontFormat;
     }
-
-    public static boolean isInstance(Object o) {
-        return o instanceof Text;
-    }
-
 }
