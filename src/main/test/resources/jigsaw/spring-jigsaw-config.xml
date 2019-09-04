@@ -7,20 +7,16 @@
                                    http://www.guanjian.com/schema/jigsaw
                                    http://www.guanjian.com/schema/jigsaw.xsd">
 
-    <jigsaw:layout id="layout1">
-        <jigsaw:panel id="globalPanel" height="200" width="200"/>
-        <jigsaw:layer id="layer1" height="200" width="200" coordinateX="0" coordinateY="0" coordinateZ="0">
-            <!--<jigsaw:image id="image1"/>-->
-            <jigsaw:text id="text1" text="你好" rgbColor="0,0,0" format="宋体" size="16" />
-        </jigsaw:layer>
-    </jigsaw:layout>
-
+    <jigsaw:layout id="layout" height="100" width="100" layers="layer1"/>
+    <jigsaw:layer id="layer1" height="100" width="100" coordinateX="0" coordinateY="0" coordinateZ="0"
+                  material="text1"/>
+    <jigsaw:text id="text1" text="你好"/>
 
     <!--<jigsaw:layout id="layout2">-->
-        <!--<jigsaw:panel id="globalPane2" height="200" width="200"/>-->
-        <!--<jigsaw:layer id="layer2" height="200" width="100" coordinateX="20" coordinateY="0" coordinateZ="0">-->
-            <!--<jigsaw:image id="image2"/>-->
-        <!--</jigsaw:layer>-->
+    <!--<jigsaw:panel id="globalPane2" height="200" width="200"/>-->
+    <!--<jigsaw:layer id="layer2" height="200" width="100" coordinateX="20" coordinateY="0" coordinateZ="0">-->
+    <!--<jigsaw:image id="image2"/>-->
+    <!--</jigsaw:layer>-->
     <!--</jigsaw:layout>-->
 
 </beans>

@@ -13,27 +13,9 @@
             <xsd:documentation><![CDATA[ 模板布局 ]]></xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="panel" />
-                <xsd:element ref="layer" minOccurs="0" maxOccurs="unbounded"/>
-            </xsd:sequence>
             <xsd:attribute name="id" type="xsd:ID" use="required">
                 <xsd:annotation>
-                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
-                </xsd:annotation>
-            </xsd:attribute>
-        </xsd:complexType>
-    </xsd:element>
-
-    <!-- com.guanjian.jigsaw.spring.configig.PanelConfigig -->
-    <xsd:element name="panel">
-        <xsd:annotation>
-            <xsd:documentation><![CDATA[ 画板 ]]></xsd:documentation>
-        </xsd:annotation>
-        <xsd:complexType>
-            <xsd:attribute name="id" type="xsd:ID" use="required">
-                <xsd:annotation>
-                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                    <xsd:documentation><![CDATA[ 模板布局BeanId ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
             <xsd:attribute name="height" type="xsd:int" use="required">
@@ -46,6 +28,11 @@
                     <xsd:documentation><![CDATA[ 宽度 ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
+            <xsd:attribute name="layers" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 图层ID；多个用英文逗号分隔 ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 
@@ -55,13 +42,9 @@
             <xsd:documentation><![CDATA[ 图层 ]]></xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
-            <xsd:choice>
-                <xsd:element ref="text"/>
-                <xsd:element ref="image"/>
-            </xsd:choice>
             <xsd:attribute name="id" type="xsd:ID" use="required">
                 <xsd:annotation>
-                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                    <xsd:documentation><![CDATA[ 图层BeanId ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
             <xsd:attribute name="height" type="xsd:string" use="required">
@@ -89,6 +72,11 @@
                     <xsd:documentation><![CDATA[ Z轴坐标 ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
+            <xsd:attribute name="material" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[ 物料ID ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 
@@ -100,7 +88,7 @@
         <xsd:complexType>
             <xsd:attribute name="id" type="xsd:ID" use="required">
                 <xsd:annotation>
-                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                    <xsd:documentation><![CDATA[ 图像的BeanId ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
             <xsd:attribute name="path" type="xsd:string" default="" use="optional">

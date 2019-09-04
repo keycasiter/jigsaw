@@ -15,13 +15,17 @@ public class LayoutBean implements Serializable {
      */
     private String id;
     /**
-     * 画板
+     * 高度
      */
-    private PanelBean panel;
+    private int height;
+    /**
+     * 宽度
+     */
+    private int width;
     /**
      * 图层
      */
-    private List<LayerBean> layerList;
+    private List<LayerBean> layers;
 
     public String getId() {
         return id;
@@ -31,19 +35,27 @@ public class LayoutBean implements Serializable {
         this.id = id;
     }
 
-    public PanelBean getPanel() {
-        return panel;
+    public int getHeight() {
+        return height;
     }
 
-    public void setPanel(PanelBean panel) {
-        this.panel = panel;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
-    public List<LayerBean> getLayerList() {
-        return layerList;
+    public int getWidth() {
+        return width;
     }
 
-    public void setLayerList(List<LayerBean> layerList) {
-        this.layerList = layerList;
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public List<LayerBean> getLayers() {
+        return layers;
+    }
+
+    public void setLayers(List<LayerBean> layers) {
+        this.layers = layers;
     }
 }

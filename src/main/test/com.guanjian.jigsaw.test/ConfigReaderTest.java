@@ -1,5 +1,7 @@
 package com.guanjian.jigsaw.test;
 
+import com.guanjian.jigsaw.spring.bean.LayerBean;
+import com.guanjian.jigsaw.spring.bean.LayoutBean;
 import com.guanjian.jigsaw.spring.bean.TextBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.xml.soap.Text;
 import java.util.Arrays;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,13 +29,20 @@ public class ConfigReaderTest implements ApplicationContextAware {
 
     @Test
     public void test() {
-        System.out.println(Arrays.toString(applicationContext.getBeanDefinitionNames()));
-        TextBean textBean = (TextBean) applicationContext.getBean("text1");
-        System.out.println(textBean.getSize());
-        System.out.println(textBean.getFormat());
-        System.out.println(textBean.getRgbColor());
-        System.out.println(textBean.getText());
+        for (String name : applicationContext.getBeanDefinitionNames()){
+            System.out.printf("%s \n",name);
+        }
+        LayoutBean layout = (LayoutBean) applicationContext.getBean("layout");
+        LayerBean layer1 = (LayerBean) applicationContext.getBean("layer1");
+        System.out.println(layout.getId());
+        System.out.println(layout.getWidth());
+        System.out.println(layout.getHeight());
+        System.out.println(layout.getLayers().size());
+        LayerBean layerBean = (LayerBean) layout.getLayers().get(0);
+        System.out.println(layerBean.getId());
+        TextBean textBean = (TextBean) layerBean.getMaterial();
         System.out.println(textBean.getId());
+        System.out.println(textBean.getRgbColor());
     }
 
     public static void main(String[] args) {

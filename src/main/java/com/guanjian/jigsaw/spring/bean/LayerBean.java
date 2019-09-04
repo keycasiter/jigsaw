@@ -38,6 +38,11 @@ public class LayerBean implements Serializable {
      */
     private Integer coordinateZ;
 
+    /**
+     * 物料
+     */
+    private Object material;
+
     public String getId() {
         return id;
     }
@@ -84,5 +89,13 @@ public class LayerBean implements Serializable {
 
     public void setCoordinateZ(Integer coordinateZ) {
         this.coordinateZ = coordinateZ;
+    }
+
+    public Object getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Object material) {
+        this.material = material;
     }
 }
