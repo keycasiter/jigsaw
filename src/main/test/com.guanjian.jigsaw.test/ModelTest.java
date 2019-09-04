@@ -13,6 +13,9 @@ public class ModelTest {
         GraphicsFactory gf = gfBuilder.build();
 
         List<LayerBean> layerBeanList = new ArrayList<LayerBean>();
+        LayerBean layer = new LayerBean();
+        layer.setId("layer1");
+        layerBeanList.add(layer);
 
         long start = System.currentTimeMillis();
         gf.produce(layerBeanList);

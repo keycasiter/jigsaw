@@ -1,5 +1,6 @@
 package com.guanjian.jigsaw.test;
 
+import com.guanjian.jigsaw.service.GraphicsFactory;
 import com.guanjian.jigsaw.spring.bean.LayerBean;
 import com.guanjian.jigsaw.spring.bean.LayoutBean;
 import com.guanjian.jigsaw.spring.bean.TextBean;
@@ -12,7 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.xml.soap.Text;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring-config.xml")
@@ -28,7 +31,7 @@ public class ConfigReaderTest implements ApplicationContextAware {
     }
 
     @Test
-    public void test() {
+    public void test01() {
         for (String name : applicationContext.getBeanDefinitionNames()){
             System.out.printf("%s \n",name);
         }
@@ -43,6 +46,22 @@ public class ConfigReaderTest implements ApplicationContextAware {
         TextBean textBean = (TextBean) layerBean.getMaterial();
         System.out.println(textBean.getId());
         System.out.println(textBean.getRgbColor());
+    }
+
+    @Test
+    public void test02(){
+        GraphicsFactory.Builder gfBuilder = new GraphicsFactory.Builder(690, 930);
+        GraphicsFactory gf = gfBuilder.build();
+
+        List<LayerBean> layerBeanList = new ArrayList<LayerBean>();
+        LayerBean layer = new LayerBean();
+        layer.setId("layer1");
+        layerBeanList.add(layer);
+
+        long start = System.currentTimeMillis();
+        gf.produce(layerBeanList);
+        long end = System.currentTimeMillis();
+        System.out.println(String.format("消耗时间 %s ms", end - start));
     }
 
     public static void main(String[] args) {

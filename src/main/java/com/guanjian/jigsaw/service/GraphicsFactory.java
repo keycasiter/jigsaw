@@ -1,23 +1,32 @@
 package com.guanjian.jigsaw.service;
 
 import com.guanjian.jigsaw.constant.Constants;
+import com.guanjian.jigsaw.spring.bean.ImageBean;
 import com.guanjian.jigsaw.spring.bean.LayerBean;
+import com.guanjian.jigsaw.spring.bean.TextBean;
 import com.guanjian.jigsaw.util.ImageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author guanjian
  * @description
  * @date 2019/6/13 11:39
  */
-public class GraphicsFactory extends AbstractGrapicsFactory {
+@Component
+public class GraphicsFactory extends AbstractGrapicsFactory implements ApplicationContextAware {
     private final static Logger LOGGER = LoggerFactory.getLogger(GraphicsFactory.class);
 
     private BufferedImage panel; //画板
@@ -25,6 +34,8 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
 
     private Integer width;  //画板宽度
     private Integer height; //画板高度
+
+    private ApplicationContext applicationContext;
 
     private GraphicsFactory() {
     }
@@ -102,9 +113,9 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
         } catch (Exception e) {
             LOGGER.error("[jigsaw] print image error", e);
         } finally {
-//            if (file.exists()) {
-//                file.delete();
-//            }
+            if (file.exists()) {
+                file.delete();
+            }
         }
 
     }
@@ -115,33 +126,43 @@ public class GraphicsFactory extends AbstractGrapicsFactory {
      * @param layerBean
      */
     private void execute(LayerBean layerBean) {
-//        final Material material = layerBean.getMaterialId();
-//        //图片图层
-//        if (material instanceof ImageBean) {
-//            ImageBean imageBean = (ImageBean) material;
-//
-//            try {
-//                final File srcFile = new File(imageBean.getPath());
-//                final Image image = ImageIO.read(srcFile);
-//                BufferedImage bi = null;
-//                if (srcFile.getName().endsWith(".png")) {
-//                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_ARGB);
-//                } else {
-//                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_RGB);
-//                }
-//                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), layerBean.getCoordinateX(), layerBean.getCoordinateY(), bi.getWidth(), bi.getHeight(), null);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        //文字图层
-//        if (material instanceof TextBean) {
-//            TextBean textConfig = (TextBean) material;
-//            //修正字体坐标
-//            final int fontSize = textConfig.getFontSize();
-//            String[] rgbColor = textConfig.getRgbColor().split(",");
-//            painting.setColor(new Color(Integer.valueOf(rgbColor[1]), Integer.valueOf(rgbColor[2]), Integer.valueOf(rgbColor[3])));
-//            painting.drawString(textConfig.getFontText(), layerBean.getCoordinateX(), layerBean.getCoordinateY() + fontSize);
-//        }
+        LayerBean targetLayerBean = null;
+        //TODO 根据beanId处理
+        if (applicationContext.containsBean(layerBean.getId())) {
+            targetLayerBean = (LayerBean) applicationContext.getBean(layerBean.getId());
+        }
+        final Object material = targetLayerBean.getMaterial();
+        //图片图层
+        if (material instanceof ImageBean) {
+            ImageBean imageBean = (ImageBean) material;
+
+            try {
+                final File srcFile = new File(imageBean.getPath());
+                final Image image = ImageIO.read(srcFile);
+                BufferedImage bi = null;
+                if (srcFile.getName().endsWith(".png")) {
+                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                } else {
+                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_RGB);
+                }
+                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), layerBean.getCoordinateX(), layerBean.getCoordinateY(), bi.getWidth(), bi.getHeight(), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //文字图层
+        if (material instanceof TextBean) {
+            TextBean textConfig = (TextBean) material;
+            //修正字体坐标
+            final int fontSize = textConfig.getSize();
+            String[] rgbColor = textConfig.getRgbColor().split(Pattern.quote(Constants.Global.COMMA));
+            painting.setColor(new Color(Integer.valueOf(rgbColor[1]), Integer.valueOf(rgbColor[2]), Integer.valueOf(rgbColor[3])));
+            painting.drawString(textConfig.getText(), layerBean.getCoordinateX(), layerBean.getCoordinateY() + fontSize);
+        }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }
