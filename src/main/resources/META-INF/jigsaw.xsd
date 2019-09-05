@@ -7,7 +7,7 @@
     <xsd:annotation>
         <xsd:documentation><![CDATA[ Jigsaw XSD ]]></xsd:documentation>
     </xsd:annotation>
-    <!-- com.guanjian.jigsaw.spring.configig.model.Layout -->
+    <!-- com.guanjian.jigsaw.spring.bean.LayoutBean -->
     <xsd:element name="layout">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 模板布局 ]]></xsd:documentation>
@@ -36,7 +36,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- com.guanjian.jigsaw.spring.configig.model.layerBean -->
+    <!-- com.guanjian.jigsaw.spring.bean.layerBean -->
     <xsd:element name="layer">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 图层 ]]></xsd:documentation>
@@ -80,7 +80,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- com.guanjian.jigsaw.spring.configig.ImageConfigig -->
+    <!-- com.guanjian.jigsaw.spring.bean.ImageBean -->
     <xsd:element name="image">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 图像 ]]></xsd:documentation>
@@ -88,7 +88,7 @@
         <xsd:complexType>
             <xsd:attribute name="id" type="xsd:ID" use="required">
                 <xsd:annotation>
-                    <xsd:documentation><![CDATA[ 图像的BeanId ]]></xsd:documentation>
+                    <xsd:documentation><![CDATA[ 图像BeanId ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
             <xsd:attribute name="path" type="xsd:string" default="" use="optional">
@@ -99,7 +99,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- com.guanjian.jigsaw.spring.configig.TextConfigig -->
+    <!-- com.guanjian.jigsaw.spring.bean.TextBean -->
     <xsd:element name="text">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ 文本 ]]></xsd:documentation>
@@ -107,7 +107,7 @@
         <xsd:complexType>
             <xsd:attribute name="id" type="xsd:ID" use="required">
                 <xsd:annotation>
-                    <xsd:documentation><![CDATA[ Spring的BeanId ]]></xsd:documentation>
+                    <xsd:documentation><![CDATA[ 文本BeanId ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
             <xsd:attribute name="rgbColor" type="xsd:string" default="0,0,0">

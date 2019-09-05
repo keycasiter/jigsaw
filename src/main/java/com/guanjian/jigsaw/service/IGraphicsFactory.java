@@ -5,15 +5,9 @@ import com.guanjian.jigsaw.spring.bean.LayerBean;
 import java.util.List;
 
 /**
- * @author guanjian
- * @description
- * @date 2019/7/26 9:28
+ * created by guanjian on 2019/9/4 20:30
  */
 public interface IGraphicsFactory {
-    /**
-     * 拼图方法
-     *
-     * @param layerBeans 图层素材
-     */
-    void produce(List<LayerBean> layerBeans);
+
+    public void produce(List<LayerBean> layers);
 }

@@ -9,8 +9,7 @@ import java.util.List;
 public class ModelTest {
 
     public static void main(String[] args) {
-        GraphicsFactory.Builder gfBuilder = new GraphicsFactory.Builder(690, 930);
-        GraphicsFactory gf = gfBuilder.build();
+        GraphicsFactory gf = GraphicsFactory.getInstance();
 
         List<LayerBean> layerBeanList = new ArrayList<LayerBean>();
         LayerBean layer = new LayerBean();

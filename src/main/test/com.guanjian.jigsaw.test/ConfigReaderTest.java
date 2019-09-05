@@ -50,8 +50,7 @@ public class ConfigReaderTest implements ApplicationContextAware {
 
     @Test
     public void test02(){
-        GraphicsFactory.Builder gfBuilder = new GraphicsFactory.Builder(690, 930);
-        GraphicsFactory gf = gfBuilder.build();
+        GraphicsFactory gf = GraphicsFactory.getInstance();
 
         List<LayerBean> layerBeanList = new ArrayList<LayerBean>();
         LayerBean layer = new LayerBean();

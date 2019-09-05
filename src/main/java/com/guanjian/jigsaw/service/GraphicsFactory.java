@@ -5,11 +5,10 @@ import com.guanjian.jigsaw.spring.bean.ImageBean;
 import com.guanjian.jigsaw.spring.bean.LayerBean;
 import com.guanjian.jigsaw.spring.bean.TextBean;
 import com.guanjian.jigsaw.util.ImageUtil;
+import com.guanjian.jigsaw.util.SpringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
@@ -25,26 +24,47 @@ import java.util.regex.Pattern;
  * @description
  * @date 2019/6/13 11:39
  */
-@Component
-public class GraphicsFactory extends AbstractGrapicsFactory implements ApplicationContextAware {
+public class GraphicsFactory implements IGraphicsFactory {
     private final static Logger LOGGER = LoggerFactory.getLogger(GraphicsFactory.class);
 
-    private BufferedImage panel; //画板
-    private Graphics2D painting; //画笔
+    /**
+     * 画板
+     */
+    private BufferedImage panel;
+    /**
+     * 画笔
+     */
+    private Graphics2D painting;
 
-    private Integer width;  //画板宽度
-    private Integer height; //画板高度
+    /**
+     * applicationContext
+     */
+    private static ApplicationContext applicationContext = SpringUtil.context;
 
-    private ApplicationContext applicationContext;
+    /**
+     * graphicsFactory
+     *
+     * @description 单例
+     */
+    private static GraphicsFactory graphicsFactory = new GraphicsFactory();
 
     private GraphicsFactory() {
     }
 
+    public static GraphicsFactory getInstance() {
+        return graphicsFactory;
+    }
+
+    /**
+     * 绘图方法
+     *
+     * @param layerBeans 图层素材
+     */
     @Override
     public void produce(List<LayerBean> layerBeans) {
         try {
-            //1、创建画板
-            buildPanel();
+            //1、生成画板
+            initPanel();
             //2、描绘图层
             draw(layerBeans);
             //3、生成图像
@@ -56,27 +76,12 @@ public class GraphicsFactory extends AbstractGrapicsFactory implements Applicati
         }
     }
 
-    public static class Builder {
-        private GraphicsFactory gf;
-
-        public Builder(int width, int height) {
-            gf = new GraphicsFactory();
-            gf.width = width;
-            gf.height = height;
-        }
-
-        public GraphicsFactory build() {
-            return gf;
-        }
-
-    }
-
     /**
-     * 创建画板
+     * 初始化画板
      */
-    private void buildPanel() {
-        final Integer panelWidth = null == this.width ? Constants.DEFAULT_PANEL_WIDTH : this.width;
-        final Integer panelHeight = null == this.height ? Constants.DEFAULT_PANEL_HEIGHT : this.height;
+    private void initPanel() {
+        final Integer panelWidth = Constants.DEFAULT_PANEL_WIDTH;
+        final Integer panelHeight = Constants.DEFAULT_PANEL_HEIGHT;
 
         final BufferedImage bi = new BufferedImage(panelWidth, panelHeight, BufferedImage.TYPE_INT_RGB);//INT精确度达到一定,RGB三原色
         panel = bi;
@@ -101,7 +106,7 @@ public class GraphicsFactory extends AbstractGrapicsFactory implements Applicati
     }
 
     /**
-     * 生成图像并上传图片到云端
+     * 生成图像到本地
      *
      * @return
      */
@@ -112,10 +117,6 @@ public class GraphicsFactory extends AbstractGrapicsFactory implements Applicati
             ImageIO.write(panel, "JPEG", file);
         } catch (Exception e) {
             LOGGER.error("[jigsaw] print image error", e);
-        } finally {
-            if (file.exists()) {
-                file.delete();
-            }
         }
 
     }
@@ -126,11 +127,12 @@ public class GraphicsFactory extends AbstractGrapicsFactory implements Applicati
      * @param layerBean
      */
     private void execute(LayerBean layerBean) {
-        LayerBean targetLayerBean = null;
+        LayerBean targetLayerBean = layerBean;
         //TODO 根据beanId处理
         if (applicationContext.containsBean(layerBean.getId())) {
             targetLayerBean = (LayerBean) applicationContext.getBean(layerBean.getId());
         }
+
         final Object material = targetLayerBean.getMaterial();
         //图片图层
         if (material instanceof ImageBean) {
@@ -141,28 +143,23 @@ public class GraphicsFactory extends AbstractGrapicsFactory implements Applicati
                 final Image image = ImageIO.read(srcFile);
                 BufferedImage bi = null;
                 if (srcFile.getName().endsWith(".png")) {
-                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                    bi = new BufferedImage(targetLayerBean.getWidth(), targetLayerBean.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 } else {
-                    bi = new BufferedImage(layerBean.getWidth(), layerBean.getHeight(), BufferedImage.TYPE_INT_RGB);
+                    bi = new BufferedImage(targetLayerBean.getWidth(), targetLayerBean.getHeight(), BufferedImage.TYPE_INT_RGB);
                 }
-                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), layerBean.getCoordinateX(), layerBean.getCoordinateY(), bi.getWidth(), bi.getHeight(), null);
+                painting.drawImage(image.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH), targetLayerBean.getCoordinateX(), targetLayerBean.getCoordinateY(), bi.getWidth(), bi.getHeight(), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         //文字图层
         if (material instanceof TextBean) {
-            TextBean textConfig = (TextBean) material;
+            TextBean textBean = (TextBean) material;
             //修正字体坐标
-            final int fontSize = textConfig.getSize();
-            String[] rgbColor = textConfig.getRgbColor().split(Pattern.quote(Constants.Global.COMMA));
-            painting.setColor(new Color(Integer.valueOf(rgbColor[1]), Integer.valueOf(rgbColor[2]), Integer.valueOf(rgbColor[3])));
-            painting.drawString(textConfig.getText(), layerBean.getCoordinateX(), layerBean.getCoordinateY() + fontSize);
+            final int fontSize = textBean.getSize();
+            String[] rgbColor = textBean.getRgbColor().split(Pattern.quote(Constants.Global.COMMA));
+            painting.setColor(new Color(Integer.valueOf(rgbColor[0]), Integer.valueOf(rgbColor[1]), Integer.valueOf(rgbColor[2])));
+            painting.drawString(textBean.getText(), targetLayerBean.getCoordinateX(), targetLayerBean.getCoordinateY() + fontSize);
         }
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
     }
 }
