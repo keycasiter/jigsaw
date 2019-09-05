@@ -1,10 +1,15 @@
 package com.guanjian.jigsaw.spring.handler;
 
-import com.guanjian.jigsaw.spring.bean.*;
+import com.guanjian.jigsaw.spring.bean.ImageBean;
+import com.guanjian.jigsaw.spring.bean.LayerBean;
+import com.guanjian.jigsaw.spring.bean.LayoutBean;
+import com.guanjian.jigsaw.spring.bean.TextBean;
 import com.guanjian.jigsaw.spring.parser.JigsawBeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 /**
+ * 注册BeanDefinition解析器
+ *
  * created by guanjian on 2019/8/27 9:09
  */
 public class JigsawNamespaceHandler extends NamespaceHandlerSupport {

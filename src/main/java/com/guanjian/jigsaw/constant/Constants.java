@@ -44,4 +44,14 @@ public final class Constants {
     public final static class Global {
         public final static String COMMA = ",";
     }
+
+    /**
+     * 全局临时文件线程绑定池
+     */
+    public final static ThreadLocal<List<String>> TMP_FILE_POOL = new ThreadLocal<List<String>>() {
+        @Override
+        protected List<String> initialValue() {
+            return new CopyOnWriteArrayList<String>();
+        }
+    };
 }
